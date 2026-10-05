@@ -1,0 +1,31 @@
+Stack Mechanics
+
+In factorial, the “Entering factorial(n)” messages appeared in increasing call order, from the original value down to the base case. 
+As each call returned, the “Returning from factorial(n) = result” messages appeared in reverse order. This showed the stack growing as 
+new calls were added and shrinking as those calls completed. Fibonacci printed the current n and depth for each call. Its output showed 
+many more calls because each non-base call made two recursve calls, while the depth values showed how far a call was nested. When I ran
+the overflow demonstration, it continued to run until I manually terminated it. There wasn't a base case in the overflow function, so it
+never knew when to stop itself, which is why it kept running. Each active function call needs a stack frame containing information such 
+as its parameters, return address, and local variables. When the function returns, its frame is removed and execution resumes at the 
+saved return address.
+
+
+Recursion Costs
+
+With the same input, factorial and recursive Fibonacci can reach a similar maximum call depth.Each follows a chain of roughly n 
+nested calls before reaching a base case. Fibonacci uses more stack space because it makes two recursive calls.Also, Fibonacci 
+repeats many calculations and makes exponentially more calls, so it takes much more time and prints far more lines. Python limits 
+recursion depth to help prevent a program from consuming too much stack and crashing the interpreter or process. Without a limit, 
+sufficiently deep recursion could exhaust available stack space, like the assignment’s infinite-recursion demonstration. The limit 
+makes runaway recursion fail with an error instead of allowing it to continue until a lower-level stack overflow.
+
+Function Pointers and Callbacks
+
+A function pointer stores the address of a function with a specific parameter and return type. Passing that pointer as a parameter lets
+another function use the supplied function when needed. In process_array, the callback is applied to each array element, so the loop
+can be reused with double_value, square_value, or negative_value without having to rewrite it for each operation. The processing function 
+controls when to call the callback, while the caller chooses what behavior it performs. A common real-world example is a GUI button 
+handler. The application registers a function to be called when a user clicks the button. Systems programmers use callbacks to make 
+components reusable and configurable, and to let libraries notify application code about events without depending on the application’s
+specific behavior. Although an indirect function call can be less readable than a direct call, callbacks can reduce duplicated code and 
+help separate mechanisms, such as iterating or dispatching, from the action to perform.
